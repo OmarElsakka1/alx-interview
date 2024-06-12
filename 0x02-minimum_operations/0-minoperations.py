@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-""" 
-Minimum Operations
-"""
+""" Minimum Operations
+    """
 
 
 def minOperations(n: int) -> int:
