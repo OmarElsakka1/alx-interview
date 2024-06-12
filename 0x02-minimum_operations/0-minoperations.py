@@ -1,21 +1,32 @@
 #!/usr/bin/python3
-""" Minimum Operations
+""" Minimum operations
+"""
+
+
+def minOperations(n):
+    """Getting the minimum number of operations
+
+    Args:
+        n (int): Number of desired H characters.
+
+    Returns:
+        int: Number of minimal operations needed to get n H characters.
     """
-
-
-def minOperations(n: int) -> int:
-    """ Minimum Operations to get n H characters """
-    next = 'H'
-    body = 'H'
-    op = 0
-    while (len(body) < n):
-        if n % len(body) == 0:
-            op += 2
-            next = body
-            body += body
-        else:
-            op += 1
-            body += next
-    if len(body) != n:
+    if not isinstance(n, int):
         return 0
-    return op
+    ops_count = 0
+    clipboard = 0
+    done = 1
+    while done < n:
+        if clipboard == 0:
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+        elif n - done > 0 and (n - done) % done == 0:
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+        elif clipboard > 0:
+            done += clipboard
+            ops_count += 1
+    return ops_count
